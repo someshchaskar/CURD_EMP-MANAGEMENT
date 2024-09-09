@@ -1,0 +1,20 @@
+body{
+    background-color: #A6E3E9;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 10px;
+}
+
+.btn {
+    margin: 5px;
+}
+
+label {
+    text-align: left;
+    display: block; /* Ensures the label takes up the full width */
+}

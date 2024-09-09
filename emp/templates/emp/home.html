@@ -1,0 +1,70 @@
+{% extends "emp/base.html" %}
+{% block title %}Home{% endblock title %}
+
+{% block main-content %}
+<section class="container">
+    <div class="row justify-content-around text-center mt-5">
+        <div class="col-sm-8">
+            <h3>CRUD Project in Employee Management</h3>
+        </div>
+        <div class="row justify-content-around mt-2">
+            <div class="col-sm-10">
+                <a href="{% url 'add-employee' %}" class='btn btn-primary float-end my-3'>Add Employee</a>
+            </div>
+        </div>
+        <div class="row justify-content-around mt-2">
+            <div class="col-sm-10">
+                <style>
+                    .spaced-table tbody tr {
+                        margin-bottom: 10px; /* Adjust the value as needed */
+                    }
+                </style>
+                <table class="table table-sm table-dark spaced-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Empid</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Salary</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emp in emp_data %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ emp.Empid }}</td>
+                            <td>{{ emp.Name }}</td>
+                            <td>{{ emp.Gender }}</td>
+                            <td>{{ emp.Email }}</td>
+                            <td>{{ emp.Address }}</td>
+                            <td>{{ emp.Contact }}</td>
+                            <td>{{ emp.Department }}</td>
+                            <td>{{ emp.Salary }}</td>
+                            <td>
+                                <!-- Update Button -->
+                                <a href="{% url 'update-employee' emp.id %}" class="btn btn-info btn-sm my-2">Update</a>
+
+
+                                <!-- Delete Form -->
+                                <form action="{% url 'delete-employee'%}" method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ emp.id }}">
+                                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
